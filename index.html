@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AITU Moodle - Prototype</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
+          sans-serif;
+        background: #f5f7fa;
+        color: #2c3e50;
+      }
+
+      /* Header */
+      .header {
+        background: white;
+        border-bottom: 1px solid #e0e6ed;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #3498db;
+      }
+
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .notification-icon {
+        position: relative;
+        cursor: pointer;
+        font-size: 1.3rem;
+      }
+
+      .badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #e74c3c;
+        color: white;
+        border-radius: 10px;
+        padding: 2px 6px;
+        font-size: 0.7rem;
+        font-weight: bold;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .user-avatar {
+        width: 36px;
+        height: 36px;
+        background: #3498db;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      /* Main Layout */
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: 280px 1fr 320px;
+        gap: 2rem;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        height: fit-content;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .sidebar h3 {
+        font-size: 0.9rem;
+        color: #7f8c8d;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      .nav-item {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .nav-item:hover {
+        background: #f8f9fa;
+      }
+
+      .nav-item.active {
+        background: #ebf5fb;
+        color: #3498db;
+        font-weight: 600;
+      }
+
+      /* Main Content */
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .welcome-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .welcome-card h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .welcome-card p {
+        opacity: 0.9;
+        font-size: 1rem;
+      }
+
+      /* Quick Actions */
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .action-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .action-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      .action-icon {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .action-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+        color: #2c3e50;
+      }
+
+      .action-card p {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+      }
+
+      /* Announcements */
+      .section-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.3rem;
+        color: #2c3e50;
+      }
+
+      .view-all {
+        color: #3498db;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+
+      .announcement-item {
+        padding: 1.25rem;
+        border-left: 4px solid #3498db;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .announcement-item:hover {
+        background: #e8f4f8;
+        transform: translateX(4px);
+      }
+
+      .announcement-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 0.5rem;
+      }
+
+      .announcement-title {
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1rem;
+      }
+
+      .announcement-date {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+        white-space: nowrap;
+      }
+
+      .announcement-course {
+        display: inline-block;
+        background: #3498db;
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .announcement-preview {
+        color: #5a6c7d;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      /* Right Sidebar */
+      .right-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .upcoming-section {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+
+      .upcoming-section h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: #2c3e50;
+      }
+
+      .deadline-item {
+        padding: 1rem;
+        background: #fff8e6;
+        border-left: 4px solid #f39c12;
+        border-radius: 6px;
+        margin-bottom: 0.75rem;
+      }
+
+      .deadline-item.urgent {
+        background: #ffe6e6;
+        border-left-color: #e74c3c;
+      }
+
+      .deadline-date {
+        font-size: 0.8rem;
+        color: #e67e22;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .deadline-date.urgent {
+        color: #e74c3c;
+      }
+
+      .deadline-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .deadline-course {
+        font-size: 0.8rem;
+        color: #7f8c8d;
+      }
+
+      /* Course List */
+      .course-item {
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .course-item:hover {
+        background: #e8f4f8;
+      }
+
+      .course-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .course-teacher {
+        font-size: 0.85rem;
+        color: #7f8c8d;
+      }
+
+      /* Search Bar */
+      .search-bar {
+        position: relative;
+        max-width: 400px;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 2px solid #e0e6ed;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: all 0.2s;
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #7f8c8d;
+      }
+
+      @media (max-width: 1200px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar,
+        .right-sidebar {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-section">
+        <div class="logo">Moodle AITU</div>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search courses, announcements..." />
+        </div>
+      </div>
+      <div class="user-section">
+        <div class="notification-icon">
+          🔔
+          <span class="badge">3</span>
+        </div>
+        <div class="user-info">
+          <div class="user-avatar">B</div>
+          <span><strong>Bob</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <h3>Navigation</h3>
+        <div class="nav-item active">📊 Dashboard</div>
+        <div class="nav-item">📚 My Courses</div>
+        <div class="nav-item">📝 Assignments</div>
+        <div class="nav-item">📅 Schedule</div>
+        <div class="nav-item">📈 Grades</div>
+        <div class="nav-item">💬 Messages</div>
+        <div class="nav-item">⚙️ Settings</div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Welcome Section -->
+        <div class="welcome-card">
+          <h1>Welcome back, Bob! 👋</h1>
+          <p>You have 3 new announcements and 2 upcoming deadlines this week</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <div class="action-card">
+            <div class="action-icon">📚</div>
+            <h3>View Courses</h3>
+            <p>Access materials & resources</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📤</div>
+            <h3>Submit Assignment</h3>
+            <p>Upload your work</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📊</div>
+            <h3>Check Grades</h3>
+            <p>View your academic progress</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📅</div>
+            <h3>Class Schedule</h3>
+            <p>Today's classes & rooms</p>
+          </div>
+        </div>
+
+        <!-- Recent Announcements -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2>Recent Announcements</h2>
+            <a href="#" class="view-all">View all →</a>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Programming I</span>
+                <div class="announcement-title">
+                  Midterm Exam Schedule Published
+                </div>
+              </div>
+              <div class="announcement-date">2 hours ago</div>
+            </div>
+            <div class="announcement-preview">
+              The midterm exam will be held on October 15th at 9:00 AM in Room
+              305. Please review chapters 1-6 and practice the sample
+              problems...
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Linear Algebra</span>
+                <div class="announcement-title">
+                  Assignment 3 Extended Deadline
+                </div>
+              </div>
+              <div class="announcement-date">Yesterday</div>
+            </div>
+            <div class="announcement-preview">
+              Due to technical issues, the deadline for Assignment 3 has been
+              extended to October 8th. Make sure to submit via the portal...
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Calculus II</span>
+                <div class="announcement-title">Office Hours This Week</div>
+              </div>
+              <div class="announcement-date">2 days ago</div>
+            </div>
+            <div class="announcement-preview">
+              I will hold office hours on Wednesday 2-4 PM and Friday 3-5 PM in
+              Room 201. Feel free to drop by for any questions...
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="right-sidebar">
+        <!-- Upcoming Deadlines -->
+        <div class="upcoming-section">
+          <h3>Upcoming Deadlines</h3>
+
+          <div class="deadline-item urgent">
+            <div class="deadline-date urgent">⚠️ Tomorrow</div>
+            <div class="deadline-title">Project Proposal</div>
+            <div class="deadline-course">Software Engineering</div>
+          </div>
+
+          <div class="deadline-item">
+            <div class="deadline-date">Oct 8, 23:59</div>
+            <div class="deadline-title">Assignment 3</div>
+            <div class="deadline-course">Linear Algebra</div>
+          </div>
+
+          <div class="deadline-item">
+            <div class="deadline-date">Oct 10, 18:00</div>
+            <div class="deadline-title">Lab Report 2</div>
+            <div class="deadline-course">Physics Lab</div>
+          </div>
+        </div>
+
+        <!-- My Courses -->
+        <div class="upcoming-section">
+          <h3>My Courses</h3>
+
+          <div class="course-item">
+            <div class="course-name">Programming I</div>
+            <div class="course-teacher">Askar Nurakhmetov</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Linear Algebra</div>
+            <div class="course-teacher">Saule Mukasheva</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Calculus II</div>
+            <div class="course-teacher">Nurlybek Kairatuly</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Software Engineering</div>
+            <div class="course-teacher">Anna Nursultanova</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script>
+      // Add interactivity
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((i) => i.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      document.querySelectorAll(".announcement-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          alert(
+            "Opening full announcement...\n\nIn a real application, this would show the complete announcement with options to mark as read, save, or share."
+          );
+        });
+      });
+
+      document.querySelectorAll(".action-card").forEach((card) => {
+        card.addEventListener("click", function () {
+          const action = this.querySelector("h3").textContent;
+          alert(
+            `Navigating to: ${action}\n\nIn the full application, this would take you to the relevant section.`
+          );
+        });
+      });
+
+      document.querySelectorAll(".course-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const course = this.querySelector(".course-name").textContent;
+          alert(
+            `Opening ${course} course page...\n\nThis would show course materials, announcements, assignments, and grades.`
+          );
+        });
+      });
+
+      // Search functionality
+      const searchInput = document.querySelector(".search-bar input");
+      searchInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          alert(
+            `Searching for: "${this.value}"\n\nResults would include courses, announcements, and materials matching your query.`
+          );
+        }
+      });
+
+      // Notification bell
+      document
+        .querySelector(".notification-icon")
+        .addEventListener("click", function () {
+          alert(
+            "Notifications:\n\n1. New announcement in Programming I\n2. Assignment graded: Linear Algebra\n3. Upcoming deadline: Project Proposal (Tomorrow)"
+          );
+        });
+    </script>
+  </body>
+</html>
