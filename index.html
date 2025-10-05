@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AITU Moodle - Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-section">
+        <img
+          class="img-logo"
+          src="https://lms.astanait.edu.kz/pluginfile.php/1/core_admin/logocompact/300x300/1759344969/logo%20AITU%28imageonly%29.png"
+          alt="Logo"
+        />
+        <div class="logo">Moodle</div>
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" placeholder="Search courses, announcements..." />
+        </div>
+      </div>
+      <div class="user-section">
+        <div class="notification-icon">
+          🔔
+          <span class="badge">3</span>
+        </div>
+        <div class="user-info">
+          <div class="user-avatar">B</div>
+          <span><strong>Bob</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+      <!-- Left Sidebar -->
+      <aside class="sidebar">
+        <h3>Navigation</h3>
+        <div class="nav-item active">📊 Dashboard</div>
+        <div class="nav-item">📚 My Courses</div>
+        <div class="nav-item">📝 Assignments</div>
+        <div class="nav-item">📅 Schedule</div>
+        <div class="nav-item">📈 Grades</div>
+        <div class="nav-item">💬 Messages</div>
+        <div class="nav-item">⚙️ Settings</div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Welcome Section -->
+        <div class="welcome-card">
+          <h1>Welcome back, Bob! 👋</h1>
+          <p>You have 3 new announcements and 2 upcoming deadlines this week</p>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <div class="action-card">
+            <div class="action-icon">📚</div>
+            <h3>View Courses</h3>
+            <p>Access materials & resources</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📤</div>
+            <h3>Submit Assignment</h3>
+            <p>Upload your work</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📊</div>
+            <h3>Check Grades</h3>
+            <p>View your academic progress</p>
+          </div>
+          <div class="action-card">
+            <div class="action-icon">📅</div>
+            <h3>Class Schedule</h3>
+            <p>Today's classes & rooms</p>
+          </div>
+        </div>
+
+        <!-- Recent Announcements -->
+        <div class="section-card">
+          <div class="section-header">
+            <h2>Recent Announcements</h2>
+            <a href="#" class="view-all">View all →</a>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Programming I</span>
+                <div class="announcement-title">
+                  Midterm Exam Schedule Published
+                </div>
+              </div>
+              <div class="announcement-date">2 hours ago</div>
+            </div>
+            <div class="announcement-preview">
+              The midterm exam will be held on October 15th at 9:00 AM in Room
+              305. Please review chapters 1-6 and practice the sample
+              problems...
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Linear Algebra</span>
+                <div class="announcement-title">
+                  Assignment 3 Extended Deadline
+                </div>
+              </div>
+              <div class="announcement-date">Yesterday</div>
+            </div>
+            <div class="announcement-preview">
+              Due to technical issues, the deadline for Assignment 3 has been
+              extended to October 8th. Make sure to submit via the portal...
+            </div>
+          </div>
+
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div>
+                <span class="announcement-course">Calculus II</span>
+                <div class="announcement-title">Office Hours This Week</div>
+              </div>
+              <div class="announcement-date">2 days ago</div>
+            </div>
+            <div class="announcement-preview">
+              I will hold office hours on Wednesday 2-4 PM and Friday 3-5 PM in
+              Room 201. Feel free to drop by for any questions...
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar -->
+      <aside class="right-sidebar">
+        <!-- Upcoming Deadlines -->
+        <div class="upcoming-section">
+          <h3>Upcoming Deadlines</h3>
+
+          <div class="deadline-item urgent">
+            <div class="deadline-date urgent">⚠️ Tomorrow</div>
+            <div class="deadline-title">Project Proposal</div>
+            <div class="deadline-course">Software Engineering</div>
+          </div>
+
+          <div class="deadline-item">
+            <div class="deadline-date">Oct 8, 23:59</div>
+            <div class="deadline-title">Assignment 3</div>
+            <div class="deadline-course">Linear Algebra</div>
+          </div>
+
+          <div class="deadline-item">
+            <div class="deadline-date">Oct 10, 18:00</div>
+            <div class="deadline-title">Lab Report 2</div>
+            <div class="deadline-course">Physics Lab</div>
+          </div>
+        </div>
+
+        <!-- Recent Grades - NEW SECTION -->
+        <div class="upcoming-section">
+          <h3>Recent Grades</h3>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Programming I</span>
+              <span class="grade-score excellent">95/100</span>
+            </div>
+            <div class="grade-assignment">Assignment 2</div>
+            <div class="grade-date">Graded 3 days ago</div>
+          </div>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Linear Algebra</span>
+              <span class="grade-score good">82/100</span>
+            </div>
+            <div class="grade-assignment">Homework 3</div>
+            <div class="grade-date">Graded 1 week ago</div>
+          </div>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Calculus II</span>
+              <span class="grade-score excellent">88/100</span>
+            </div>
+            <div class="grade-assignment">Midterm Exam</div>
+            <div class="grade-date">Graded 2 weeks ago</div>
+          </div>
+
+          <a href="#" class="view-all-link">View all grades →</a>
+        </div>
+
+        <!-- My Courses -->
+        <div class="upcoming-section">
+          <h3>My Courses</h3>
+
+          <div class="course-item">
+            <div class="course-name">Programming I</div>
+            <div class="course-teacher">Askar Nurakhmetov</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Linear Algebra</div>
+            <div class="course-teacher">Saule Mukasheva</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Calculus II</div>
+            <div class="course-teacher">Nurlybek Kairatuly</div>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">Software Engineering</div>
+            <div class="course-teacher">Anna Nursultanova</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
