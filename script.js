@@ -34,6 +34,29 @@ document.querySelectorAll(".course-item").forEach((item) => {
   });
 });
 
+// Grade items functionality - NEW
+document.querySelectorAll(".grade-item").forEach((item) => {
+  item.addEventListener("click", function () {
+    const assignment = this.querySelector(".grade-assignment").textContent;
+    const score = this.querySelector(".grade-score").textContent;
+    const course = this.querySelector(".grade-course-name").textContent;
+    alert(
+      `Grade Details\n\nCourse: ${course}\nAssignment: ${assignment}\nScore: ${score}\n\nThis would show:\n• Detailed feedback from teacher\n• Grading rubric breakdown\n• Submission history\n• Comments and suggestions`
+    );
+  });
+});
+
+// View all grades link - NEW
+const viewAllGradesLink = document.querySelector(".view-all-link");
+if (viewAllGradesLink) {
+  viewAllGradesLink.addEventListener("click", function (e) {
+    e.preventDefault();
+    alert(
+      "All Grades Page\n\nThis would show:\n• Complete grade history for all courses\n• GPA calculation\n• Course averages\n• Grade trends and analytics\n• Export to PDF option"
+    );
+  });
+}
+
 // Search functionality
 const searchInput = document.querySelector(".search-bar input");
 searchInput.addEventListener("keypress", function (e) {

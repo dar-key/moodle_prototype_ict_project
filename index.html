@@ -4,13 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AITU Moodle - Prototype</title>
-    <link rel="stylesheet" href="./styles.css"></link>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <!-- Header -->
     <div class="header">
       <div class="logo-section">
-        <div class="logo">Moodle AITU</div>
+        <img
+          class="img-logo"
+          src="https://lms.astanait.edu.kz/pluginfile.php/1/core_admin/logocompact/300x300/1759344969/logo%20AITU%28imageonly%29.png"
+          alt="Logo"
+        />
+        <div class="logo">Moodle</div>
         <div class="search-bar">
           <span class="search-icon">🔍</span>
           <input type="text" placeholder="Search courses, announcements..." />
@@ -153,6 +158,40 @@
             <div class="deadline-title">Lab Report 2</div>
             <div class="deadline-course">Physics Lab</div>
           </div>
+        </div>
+
+        <!-- Recent Grades - NEW SECTION -->
+        <div class="upcoming-section">
+          <h3>Recent Grades</h3>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Programming I</span>
+              <span class="grade-score excellent">95/100</span>
+            </div>
+            <div class="grade-assignment">Assignment 2</div>
+            <div class="grade-date">Graded 3 days ago</div>
+          </div>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Linear Algebra</span>
+              <span class="grade-score good">82/100</span>
+            </div>
+            <div class="grade-assignment">Homework 3</div>
+            <div class="grade-date">Graded 1 week ago</div>
+          </div>
+
+          <div class="grade-item">
+            <div class="grade-header">
+              <span class="grade-course-name">Calculus II</span>
+              <span class="grade-score excellent">88/100</span>
+            </div>
+            <div class="grade-assignment">Midterm Exam</div>
+            <div class="grade-date">Graded 2 weeks ago</div>
+          </div>
+
+          <a href="#" class="view-all-link">View all grades →</a>
         </div>
 
         <!-- My Courses -->
