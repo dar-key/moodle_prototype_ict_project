@@ -34,7 +34,7 @@ document.querySelectorAll(".course-item").forEach((item) => {
   });
 });
 
-// Grade items functionality - NEW
+// Grade items functionality
 document.querySelectorAll(".grade-item").forEach((item) => {
   item.addEventListener("click", function () {
     const assignment = this.querySelector(".grade-assignment").textContent;
@@ -46,7 +46,7 @@ document.querySelectorAll(".grade-item").forEach((item) => {
   });
 });
 
-// View all grades link - NEW
+// View all grades link
 const viewAllGradesLink = document.querySelector(".view-all-link");
 if (viewAllGradesLink) {
   viewAllGradesLink.addEventListener("click", function (e) {
